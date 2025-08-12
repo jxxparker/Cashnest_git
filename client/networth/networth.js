@@ -38,17 +38,14 @@ async function fetchNetWorth() {
     // Render stats
     renderNetWorthStats(assetsTotal, stocksTotal, debtsTotal, netWorth);
 
-  // Store data globally for tab switching
+  // Store data globally
   window.assets = assets;
   window.debts = debts;
   window.stocks = stocks;
 
-  // Get selected tab
-  const tab = localStorage.getItem("networthTab") || "assets";
-
-  // Render forms and lists for selected tab
-  renderNetWorthForms(tab);
-  renderNetWorthLists(tab);
+  // Render all forms and lists
+  renderNetWorthForms();
+  renderNetWorthLists();
   } catch (error) {
     console.error("Error fetching net worth data:", error);
     showNetWorthError("Failed to load data. Please try again.");
@@ -103,115 +100,126 @@ function renderNetWorthStats(assetsTotal, stocksTotal, debtsTotal, netWorth) {
 
 function renderNetWorthForms(tab = "assets") {
   const formsContainer = document.getElementById("networth-forms");
-  let html = "";
-  if (tab === "assets") {
-    html = `<div class="card">
-      <div class="card-header"><h3>💰 Add Asset</h3></div>
-      <div class="card-content">
-        <form id="add-asset-form" class="form-grid">
-          <div class="form-group">
-            <label for="asset-name">Asset Name</label>
-            <input type="text" id="asset-name" placeholder="e.g., Savings Account" required />
-          </div>
-          <div class="form-group">
-            <label for="asset-value">Value</label>
-            <input type="number" id="asset-value" placeholder="0.00" step="0.01" required />
-          </div>
-          <button type="submit" class="btn btn-success">Add Asset</button>
-        </form>
+  formsContainer.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-2xl);">
+      <div class="card">
+        <div class="card-header"><h3>💰 Add Asset</h3></div>
+        <div class="card-content">
+          <form id="add-asset-form" class="form-grid">
+            <div class="form-group">
+              <label for="asset-name">Asset Name</label>
+              <input type="text" id="asset-name" placeholder="e.g., Savings Account" required />
+            </div>
+            <div class="form-group">
+              <label for="asset-value">Value</label>
+              <input type="number" id="asset-value" placeholder="0.00" step="0.01" required />
+            </div>
+            <button type="submit" class="btn btn-success">Add Asset</button>
+          </form>
+        </div>
       </div>
-    </div>`;
-  } else if (tab === "debts") {
-    html = `<div class="card">
-      <div class="card-header"><h3>💳 Add Debt</h3></div>
-      <div class="card-content">
-        <form id="add-debt-form" class="form-grid">
-          <div class="form-group">
-            <label for="debt-name">Debt Name</label>
-            <input type="text" id="debt-name" placeholder="e.g., Credit Card" required />
-          </div>
-          <div class="form-group">
-            <label for="debt-value">Amount</label>
-            <input type="number" id="debt-value" placeholder="0.00" step="0.01" required />
-          </div>
-          <button type="submit" class="btn btn-danger">Add Debt</button>
-        </form>
+
+      <div class="card">
+        <div class="card-header"><h3>💳 Add Debt</h3></div>
+        <div class="card-content">
+          <form id="add-debt-form" class="form-grid">
+            <div class="form-group">
+              <label for="debt-name">Debt Name</label>
+              <input type="text" id="debt-name" placeholder="e.g., Credit Card" required />
+            </div>
+            <div class="form-group">
+              <label for="debt-value">Amount</label>
+              <input type="number" id="debt-value" placeholder="0.00" step="0.01" required />
+            </div>
+            <button type="submit" class="btn btn-danger">Add Debt</button>
+          </form>
+        </div>
       </div>
-    </div>`;
-  } else if (tab === "stocks") {
-    html = `<div class="card">
-      <div class="card-header"><h3>📈 Add Stock</h3></div>
-      <div class="card-content">
-        <form id="add-stock-form" class="form-grid">
-          <div class="form-group">
-            <label for="stock-symbol">Stock Symbol</label>
-            <input type="text" id="stock-symbol" placeholder="e.g., AAPL" required style="text-transform: uppercase;" />
-          </div>
-          <div class="form-group">
-            <label for="stock-shares">Shares</label>
-            <input type="number" id="stock-shares" placeholder="Number of shares" step="0.01" required />
-          </div>
-          <button type="submit" class="btn btn-primary">Add Stock</button>
-        </form>
+
+      <div class="card">
+        <div class="card-header"><h3>📈 Add Stock</h3></div>
+        <div class="card-content">
+          <form id="add-stock-form" class="form-grid">
+            <div class="form-group">
+              <label for="stock-symbol">Stock Symbol</label>
+              <input type="text" id="stock-symbol" placeholder="e.g., AAPL" required style="text-transform: uppercase;" />
+            </div>
+            <div class="form-group">
+              <label for="stock-shares">Shares</label>
+              <input type="number" id="stock-shares" placeholder="Number of shares" step="0.01" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Stock</button>
+          </form>
+        </div>
       </div>
-    </div>`;
-  }
-  formsContainer.innerHTML = html;
+    </div>
+  `;
   attachFormListeners();
 }
 
 function renderNetWorthLists(tab = "assets") {
   const listsContainer = document.getElementById("networth-lists");
-  let html = "";
-  if (window.assets && window.debts && window.stocks) {
-    if (tab === "assets") {
-      html = window.assets.length > 0
-        ? window.assets.map(asset => `
-            <div class="list-item">
-              <div class="list-item-content">
-                <div class="list-item-title">${asset.name}</div>
-                <div class="list-item-subtitle">Asset</div>
-              </div>
-              <div style="display: flex; align-items: center; gap: var(--space-md);">
-                <div class="list-item-value positive">$${asset.value.toLocaleString()}</div>
-                <button class="btn btn-danger" onclick="deleteItem('asset', '${asset._id}')">Delete</button>
-              </div>
-            </div>
-          `).join("")
-        : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No assets yet</div><div class="list-item-subtitle">Add your first asset above</div></div></div>';
-    } else if (tab === "debts") {
-      html = window.debts.length > 0
-        ? window.debts.map(debt => `
-            <div class="list-item">
-              <div class="list-item-content">
-                <div class="list-item-title">${debt.name}</div>
-                <div class="list-item-subtitle">Debt</div>
-              </div>
-              <div style="display: flex; align-items: center; gap: var(--space-md);">
-                <div class="list-item-value negative">$${debt.value.toLocaleString()}</div>
-                <button class="btn btn-danger" onclick="deleteItem('debt', '${debt._id}')">Delete</button>
-              </div>
-            </div>
-          `).join("")
-        : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No debts yet</div><div class="list-item-subtitle">Add debt information above</div></div></div>';
-    } else if (tab === "stocks") {
-      html = window.stocks.length > 0
-        ? window.stocks.map(stock => `
-            <div class="list-item">
-              <div class="list-item-content">
-                <div class="list-item-title">${stock.symbol}</div>
-                <div class="list-item-subtitle">${stock.shares} shares @ $${stock.price || "Loading..."}</div>
-              </div>
-              <div style="display: flex; align-items: center; gap: var(--space-md);">
-                <div class="list-item-value primary">$${((stock.price || 0) * stock.shares).toLocaleString()}</div>
-                <button class="btn btn-danger" onclick="deleteItem('stock', '${stock._id}')">Delete</button>
-              </div>
-            </div>
-          `).join("")
-        : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No stocks yet</div><div class="list-item-subtitle">Add your first stock above</div></div></div>';
-    }
-  }
-  listsContainer.innerHTML = html;
+  let assetsHTML = window.assets && window.assets.length > 0
+    ? window.assets.map(asset => `
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">${asset.name}</div>
+            <div class="list-item-subtitle">Asset</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-md);">
+            <div class="list-item-value positive">$${asset.value.toLocaleString()}</div>
+            <button class="btn btn-danger" onclick="deleteItem('asset', '${asset._id}')">Delete</button>
+          </div>
+        </div>
+      `).join("")
+    : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No assets yet</div><div class="list-item-subtitle">Add your first asset above</div></div></div>';
+
+  let debtsHTML = window.debts && window.debts.length > 0
+    ? window.debts.map(debt => `
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">${debt.name}</div>
+            <div class="list-item-subtitle">Debt</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-md);">
+            <div class="list-item-value negative">$${debt.value.toLocaleString()}</div>
+            <button class="btn btn-danger" onclick="deleteItem('debt', '${debt._id}')">Delete</button>
+          </div>
+        </div>
+      `).join("")
+    : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No debts yet</div><div class="list-item-subtitle">Add debt information above</div></div></div>';
+
+  let stocksHTML = window.stocks && window.stocks.length > 0
+    ? window.stocks.map(stock => `
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">${stock.symbol}</div>
+            <div class="list-item-subtitle">${stock.shares} shares @ $${stock.price || "Loading..."}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-md);">
+            <div class="list-item-value primary">$${((stock.price || 0) * stock.shares).toLocaleString()}</div>
+            <button class="btn btn-danger" onclick="deleteItem('stock', '${stock._id}')">Delete</button>
+          </div>
+        </div>
+      `).join("")
+    : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No stocks yet</div><div class="list-item-subtitle">Add your first stock above</div></div></div>';
+
+  listsContainer.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-lg);">
+      <div class="list-container">
+        <div class="list-header">💰 Assets</div>
+        ${assetsHTML}
+      </div>
+      <div class="list-container">
+        <div class="list-header">💳 Debts</div>
+        ${debtsHTML}
+      </div>
+      <div class="list-container">
+        <div class="list-header">📈 Stocks</div>
+        ${stocksHTML}
+      </div>
+    </div>
+  `;
 }
 
 function attachFormListeners() {
