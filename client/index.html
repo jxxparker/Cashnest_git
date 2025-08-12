@@ -264,6 +264,10 @@
             document.getElementById("main-nav").style.display = "block";
             showSection("networth");
 
+            // Fetch new user's dashboard data
+            if (typeof fetchNetWorth === "function") fetchNetWorth();
+            if (typeof fetchUsername === "function") fetchUsername();
+
             // Reinitialize theme after login
             initializeTheme();
 
