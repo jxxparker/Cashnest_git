@@ -203,6 +203,14 @@
         initializeTheme();
 
         const token = localStorage.getItem("token");
+        const loginTime = localStorage.getItem("loginTime");
+        const now = Date.now();
+        // If logged in and loginTime is set, check if 1 hour has passed
+        if (token && loginTime && now - parseInt(loginTime, 10) > 3600000) {
+          logout();
+          return;
+        }
+
         if (token) {
           // Try to get username from token or localStorage
           let username = localStorage.getItem("username");
@@ -245,6 +253,7 @@
           if (res.ok && data.token) {
             localStorage.setItem("token", data.token);
             localStorage.setItem("username", username);
+            localStorage.setItem("loginTime", Date.now().toString());
 
             // Set username in navigation
             document.getElementById(
@@ -297,6 +306,7 @@
       function logout() {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
+        localStorage.removeItem("loginTime");
         document.getElementById("main-nav").style.display = "none";
         document.getElementById("nav-username").textContent = "";
         showSection("auth");
