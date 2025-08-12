@@ -10,127 +10,171 @@
   <body>
     <nav id="main-nav" style="display: none">
       <div class="nav-features">
-        <button onclick="showSection('networth')">Net Worth</button>
-        <button onclick="showSection('expenses')">Expenses</button>
+        <button class="btn btn-secondary" onclick="showSection('networth')">
+          💰 Net Worth
+        </button>
+        <button class="btn btn-secondary" onclick="showSection('expenses')">
+          📊 Expenses
+        </button>
       </div>
       <div class="nav-user">
+        <span id="nav-username"></span>
         <button id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
           🌙
         </button>
-        <span id="nav-username"></span>
-        <button onclick="logout()">Logout</button>
+        <button class="btn btn-secondary" onclick="logout()">Logout</button>
       </div>
     </nav>
+
     <main>
+      <!-- Authentication Section -->
       <section id="auth-section">
-        <h2>Login / Register</h2>
-        <form id="login-form">
-          <input
-            type="text"
-            id="login-username"
-            placeholder="Username"
-            required
-          />
-          <input
-            type="password"
-            id="login-password"
-            placeholder="Password"
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
-        <form id="register-form">
-          <input
-            type="text"
-            id="register-username"
-            placeholder="Username"
-            required
-          />
-          <input
-            type="password"
-            id="register-password"
-            placeholder="Password"
-            required
-          />
-          <button type="submit">Register</button>
-        </form>
-        <div id="auth-message"></div>
-      </section>
-      <section id="networth-section" style="display: none">
-        <h2>Net Worth Tracker</h2>
-        <div id="networth-root"></div>
-        <form id="add-asset-form">
-          <input
-            type="text"
-            id="asset-name"
-            placeholder="Asset Name"
-            required
-          />
-          <input type="number" id="asset-value" placeholder="Value" required />
-          <button type="submit">Add Asset</button>
-        </form>
-        <form id="add-debt-form">
-          <input type="text" id="debt-name" placeholder="Debt Name" required />
-          <input type="number" id="debt-value" placeholder="Value" required />
-          <button type="submit">Add Debt</button>
-        </form>
-        <form id="add-stock-form">
-          <input
-            type="text"
-            id="stock-symbol"
-            placeholder="Stock Symbol"
-            required
-          />
-          <input
-            type="number"
-            id="stock-shares"
-            placeholder="Shares"
-            required
-          />
-          <button type="submit">Add Stock</button>
-        </form>
-      </section>
-      <section id="expenses-section" style="display: none">
-        <h2>Expense Tracker</h2>
-        <form id="add-expense-form">
-          <input type="date" id="expense-date" required />
-          <input
-            type="number"
-            id="expense-amount"
-            placeholder="Amount"
-            required
-          />
-          <input
-            type="text"
-            id="expense-details"
-            placeholder="Details"
-            required
-          />
-          <select
-            id="expense-category"
-            required
-            style="
-              padding: 0.5em 1em;
-              font-size: 1rem;
-              border-radius: 6px;
-              border: 1px solid #ddd;
-            "
+        <div class="auth-card fade-in">
+          <h1 class="text-center">Welcome to Cashnest</h1>
+          <p
+            class="text-center"
+            style="color: var(--gray-600); margin-bottom: var(--space-xl)"
           >
-            <option value="">Select Category</option>
-            <option value="Grocery">Grocery</option>
-            <option value="Bills">Bills</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Financed Items">Financed Items</option>
-            <option value="Investments">Investments</option>
-            <option value="Food">Food</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Hospital/Emergency">Hospital/Emergency</option>
-          </select>
-          <button type="submit">Add Expense</button>
-        </form>
-        <div id="expenses-root"></div>
+            Your modern personal finance companion
+          </p>
+
+          <div class="auth-tabs">
+            <button
+              class="auth-tab active"
+              onclick="switchAuthTab('login')"
+              id="login-tab"
+            >
+              Login
+            </button>
+            <button
+              class="auth-tab"
+              onclick="switchAuthTab('register')"
+              id="register-tab"
+            >
+              Register
+            </button>
+          </div>
+
+          <form id="login-form" class="form-grid">
+            <div class="form-group">
+              <label for="login-username">Username</label>
+              <input
+                type="text"
+                id="login-username"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+          </form>
+
+          <form id="register-form" class="form-grid" style="display: none">
+            <div class="form-group">
+              <label for="register-username">Username</label>
+              <input
+                type="text"
+                id="register-username"
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input
+                type="password"
+                id="register-password"
+                placeholder="Create a password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Create Account
+            </button>
+          </form>
+
+          <div id="auth-message"></div>
+        </div>
+      </section>
+
+      <!-- Net Worth Section -->
+      <section id="networth-section" style="display: none">
+        <div class="fade-in">
+          <h1>💰 Net Worth Dashboard</h1>
+          <div id="networth-stats"></div>
+          <div id="networth-forms"></div>
+          <div id="networth-lists"></div>
+        </div>
+      </section>
+
+      <!-- Expenses Section -->
+      <section id="expenses-section" style="display: none">
+        <div class="fade-in">
+          <h1>📊 Expense Tracker</h1>
+          <div class="card">
+            <div class="card-header">
+              <h3>Add New Expense</h3>
+            </div>
+            <div class="card-content">
+              <form id="add-expense-form" class="form-grid">
+                <div class="form-group">
+                  <label for="expense-date">Date</label>
+                  <input type="date" id="expense-date" required />
+                </div>
+                <div class="form-group">
+                  <label for="expense-amount">Amount</label>
+                  <input
+                    type="number"
+                    id="expense-amount"
+                    placeholder="0.00"
+                    step="0.01"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="expense-details">Description</label>
+                  <input
+                    type="text"
+                    id="expense-details"
+                    placeholder="What was this expense for?"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="expense-category">Category</label>
+                  <select id="expense-category" required>
+                    <option value="">Select Category</option>
+                    <option value="Grocery">🛒 Grocery</option>
+                    <option value="Bills">📱 Bills</option>
+                    <option value="Entertainment">🎬 Entertainment</option>
+                    <option value="Financed Items">💳 Financed Items</option>
+                    <option value="Investments">📈 Investments</option>
+                    <option value="Food">🍔 Food</option>
+                    <option value="Transportation">🚗 Transportation</option>
+                    <option value="Hospital/Emergency">
+                      🏥 Hospital/Emergency
+                    </option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Add Expense
+                </button>
+              </form>
+            </div>
+          </div>
+          <div id="expenses-root"></div>
+        </div>
       </section>
     </main>
+    <script src="config.js"></script>
     <script src="networth/networth.js"></script>
     <script src="expenses/expenses.js"></script>
     <script>
@@ -260,6 +304,24 @@
       }
 
       // Theme toggle functionality
+      // Switch between login and register tabs
+      function switchAuthTab(tab) {
+        const loginTab = document.getElementById("login-tab");
+        const registerTab = document.getElementById("register-tab");
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
+        if (tab === "login") {
+          loginTab.classList.add("active");
+          registerTab.classList.remove("active");
+          loginForm.style.display = "block";
+          registerForm.style.display = "none";
+        } else {
+          loginTab.classList.remove("active");
+          registerTab.classList.add("active");
+          loginForm.style.display = "none";
+          registerForm.style.display = "block";
+        }
+      }
       function toggleTheme() {
         console.log("Theme toggle clicked!"); // Debug log
         const body = document.body;
