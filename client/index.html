@@ -110,10 +110,30 @@
         <div class="fade-in">
           <h1>💰 Net Worth Dashboard</h1>
           <div id="networth-stats"></div>
+          <nav id="networth-navbar" class="networth-navbar" style="margin-bottom: 2rem;">
+            <button class="networth-tab active" onclick="switchNetworthTab('assets')" id="assets-tab">Assets</button>
+            <button class="networth-tab" onclick="switchNetworthTab('debts')" id="debts-tab">Debts</button>
+            <button class="networth-tab" onclick="switchNetworthTab('stocks')" id="stocks-tab">Stocks</button>
+          </nav>
           <div id="networth-forms"></div>
           <div id="networth-lists"></div>
         </div>
       </section>
+      // Net Worth tab switching logic
+      function switchNetworthTab(tab) {
+        document.getElementById("assets-tab").classList.remove("active");
+        document.getElementById("debts-tab").classList.remove("active");
+        document.getElementById("stocks-tab").classList.remove("active");
+        document.getElementById(tab + "-tab").classList.add("active");
+        localStorage.setItem("networthTab", tab);
+        if (typeof renderNetWorthForms === "function") renderNetWorthForms(tab);
+        if (typeof renderNetWorthLists === "function") renderNetWorthLists(tab);
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const tab = localStorage.getItem("networthTab") || "assets";
+        switchNetworthTab(tab);
+      });
 
       <!-- Expenses Section -->
       <section id="expenses-section" style="display: none">
