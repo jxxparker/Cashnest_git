@@ -383,6 +383,32 @@ input::placeholder {
   background: #dc2626 !important;
 }
 
+/* Dark mode: add asset button green, add stock button blue, add debt button same size */
+.dark-mode #networth-forms .btn-success,
+.dark-mode #networth-forms button.btn-success {
+  background: #22c55e !important;
+  color: #fff !important;
+  border: 1px solid #22c55e !important;
+  width: 100%;
+  font-size: 1.1rem;
+}
+.dark-mode #networth-forms .btn-primary,
+.dark-mode #networth-forms button.btn-primary {
+  background: #3b82f6 !important;
+  color: #fff !important;
+  border: 1px solid #3b82f6 !important;
+  width: 100%;
+  font-size: 1.1rem;
+}
+.dark-mode #networth-forms .btn-danger,
+.dark-mode #networth-forms button.btn-danger {
+  background: #ef4444 !important;
+  color: #fff !important;
+  border: 1px solid #ef4444 !important;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
 /* Stats Grid */
 .stats-grid {
   display: grid;
