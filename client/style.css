@@ -803,3 +803,29 @@ input::placeholder {
   background: #23272f !important;
   border: 1px solid #18181b !important;
 }
+
+/* Dark mode fixes for net worth forms and lists */
+.dark-mode #networth-forms,
+.dark-mode #networth-lists {
+  background: #23272f !important;
+  color: #e5e7eb !important;
+}
+.dark-mode .form-group label {
+  color: #e5e7eb !important;
+}
+.dark-mode .list-item {
+  background: #23272f !important;
+  border-bottom: 1px solid #18181b !important;
+}
+.dark-mode .list-item-content {
+  color: #e5e7eb !important;
+}
+.dark-mode .list-item-title {
+  color: #e5e7eb !important;
+}
+.dark-mode .list-item-subtitle {
+  color: #a1a1aa !important;
+}
+.dark-mode .list-item-value {
+  color: #c084fc !important;
+}
