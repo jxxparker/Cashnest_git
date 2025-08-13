@@ -795,3 +795,11 @@ input::placeholder {
 .shadow {
   box-shadow: var(--shadow-md);
 }
+
+/* Dark mode cards and containers */
+.dark-mode .auth-card,
+.dark-mode .list-container,
+.dark-mode .stat-card {
+  background: #23272f !important;
+  border: 1px solid #18181b !important;
+}
