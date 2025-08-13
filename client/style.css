@@ -1,3 +1,37 @@
+/* Dark/Light Theme Styles */
+.dark-mode {
+  background: linear-gradient(135deg, #18181b 0%, #27272a 100%) !important;
+  color: #f3f4f6 !important;
+}
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+  color: #f3f4f6 !important;
+}
+.dark-mode input, .dark-mode select {
+  background: #27272a !important;
+  color: #f3f4f6 !important;
+  border-color: #444 !important;
+}
+.dark-mode .btn, .dark-mode button {
+  background: #444 !important;
+  color: #f3f4f6 !important;
+}
+.dark-mode .stat-value.positive {
+  color: #22c55e !important;
+}
+.dark-mode .stat-value.primary {
+  color: #3b82f6 !important;
+}
+.dark-mode .stat-value.negative {
+  color: #ef4444 !important;
+}
+.dark-mode .stat-value.networth-purple {
+  color: #a855f7 !important;
+}
+
+/* Net Worth Purple Color */
+.stat-value.networth-purple {
+  color: #a855f7;
+}
 /* Modern Business-Ready Design System */
 :root {
   /* Brand Colors */

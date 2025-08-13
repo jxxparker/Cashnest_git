@@ -80,9 +80,7 @@ function renderNetWorthStats(assetsTotal, stocksTotal, debtsTotal, netWorth) {
           <div class="stat-label">Net Worth</div>
           <div class="stat-subtitle">Assets - Debts</div>
         </div>
-        <div class="stat-value ${
-          netWorth >= 0 ? "positive" : "negative"
-        }" style="font-size: 1.5rem; font-weight: 900;" title="$${netWorth.toLocaleString()}">
+        <div class="stat-value networth-purple" style="font-size: 1.5rem; font-weight: 900;" title="$${netWorth.toLocaleString()}">
           $${formatCurrency(netWorth)}
         </div>
       </div>

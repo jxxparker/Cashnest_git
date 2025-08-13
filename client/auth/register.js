@@ -6,7 +6,23 @@ registerForm.innerHTML = `
   <input name="password" type="password" placeholder="Password" required />
   <button type="submit">Register</button>
   <div id="register-error" style="color:red"></div>
+  <div style="margin-top:1rem;text-align:center;">
+    <button id="theme-toggle" type="button">Toggle Dark/Light Theme</button>
+  </div>
 `;
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    themeToggle.onclick = function () {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    };
+    // Set theme on load
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+});
 registerForm.onsubmit = async (e) => {
   e.preventDefault();
   const email = registerForm.email.value;
