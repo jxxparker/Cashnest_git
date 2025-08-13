@@ -808,17 +808,42 @@ input::placeholder {
 }
 
 /* Dark mode overrides for net worth forms and lists */
-.dark-mode .stat-card,
-.dark-mode .list-container {
+.dark-mode #networth-forms,
+.dark-mode #networth-lists {
+  background: #18181b !important;
+  color: #e5e7eb !important;
+}
+.dark-mode .form-group,
+.dark-mode .form-group input,
+.dark-mode .form-group select {
   background: #23272a !important;
-  border: 1px solid #18181b !important;
+  color: #e5e7eb !important;
+  border-color: #444 !important;
+}
+.dark-mode .form-group label {
+  color: #c084fc !important;
+}
+.dark-mode .form-group button {
+  background: #23272a !important;
+  color: #c084fc !important;
+  border: 1px solid #444 !important;
+}
+.dark-mode .form-group input::placeholder {
+  color: #a1a1aa !important;
+}
+.dark-mode .list-container,
+.dark-mode .stat-card {
+  background: #18181b !important;
+  border: 1px solid #23272a !important;
 }
 .dark-mode .list-item {
   background: #23272a !important;
   border-bottom: 1px solid #18181b !important;
 }
-.dark-mode .list-item-content,
 .dark-mode .list-item-title {
+  color: #c084fc !important;
+}
+.dark-mode .list-item-content {
   color: #e5e7eb !important;
 }
 .dark-mode .list-item-subtitle {
@@ -826,21 +851,4 @@ input::placeholder {
 }
 .dark-mode .list-item-value {
   color: #c084fc !important;
-}
-.dark-mode .form-group label {
-  color: #e5e7eb !important;
-}
-.dark-mode .form-group input,
-.dark-mode .form-group select {
-  background: #23272a !important;
-  color: #e5e7eb !important;
-  border-color: #444 !important;
-}
-.dark-mode .form-group input::placeholder {
-  color: #a1a1aa !important;
-}
-.dark-mode .form-group button {
-  background: #23272a !important;
-  color: #c084fc !important;
-  border: 1px solid #444 !important;
 }
