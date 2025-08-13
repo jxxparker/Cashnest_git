@@ -75,6 +75,7 @@
               />
             </div>
             <button type="submit" class="btn btn-primary">Sign In</button>
+            <button id="theme-toggle-login" type="button" class="btn btn-secondary" style="margin-top:1rem;">Toggle Dark/Light Theme</button>
           </form>
 
           <form id="register-form" class="form-grid" style="display: none">
@@ -96,12 +97,29 @@
                 required
               />
             </div>
-            <button type="submit" class="btn btn-primary">
-              Create Account
-            </button>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button id="theme-toggle-register" type="button" class="btn btn-secondary" style="margin-top:1rem;">Toggle Dark/Light Theme</button>
           </form>
 
           <div id="auth-message"></div>
+    <script>
+      function setThemeFromStorage() {
+        if (localStorage.getItem("theme") === "dark") {
+          document.body.classList.add("dark-mode");
+        } else {
+          document.body.classList.remove("dark-mode");
+        }
+      }
+      setThemeFromStorage();
+      document.getElementById("theme-toggle-login").onclick = function () {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      };
+      document.getElementById("theme-toggle-register").onclick = function () {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+      };
+    </script>
         </div>
       </section>
 
