@@ -801,50 +801,30 @@ input::placeholder {
 
 /* Dark mode cards and containers */
 .dark-mode .auth-card,
+.dark-mode .card,
 .dark-mode .list-container,
-.dark-mode .stat-card {
-  background: #23272f !important;
-  border: 1px solid #18181b !important;
-}
-
-/* Dark mode overrides for net worth forms and lists */
+.dark-mode .stat-card,
+.dark-mode .form-group,
 .dark-mode #networth-forms,
-.dark-mode #networth-lists {
+.dark-mode #networth-lists,
+.dark-mode .list-header,
+.dark-mode .list-item,
+.dark-mode main,
+.dark-mode body {
   background: #18181b !important;
   color: #e5e7eb !important;
+  border-color: #23272a !important;
 }
-.dark-mode .form-group,
-.dark-mode .form-group input,
-.dark-mode .form-group select {
+.dark-mode input,
+.dark-mode select,
+.dark-mode button {
   background: #23272a !important;
   color: #e5e7eb !important;
   border-color: #444 !important;
 }
-.dark-mode .form-group label {
-  color: #c084fc !important;
-}
-.dark-mode .form-group button {
-  background: #23272a !important;
-  color: #c084fc !important;
-  border: 1px solid #444 !important;
-}
-.dark-mode .form-group input::placeholder {
-  color: #a1a1aa !important;
-}
-.dark-mode .list-container,
-.dark-mode .stat-card {
-  background: #18181b !important;
-  border: 1px solid #23272a !important;
-}
-.dark-mode .list-item {
-  background: #23272a !important;
-  border-bottom: 1px solid #18181b !important;
-}
-.dark-mode .list-item-title {
-  color: #c084fc !important;
-}
+.dark-mode .list-item-title,
 .dark-mode .list-item-content {
-  color: #e5e7eb !important;
+  color: #c084fc !important;
 }
 .dark-mode .list-item-subtitle {
   color: #a1a1aa !important;
@@ -852,23 +832,13 @@ input::placeholder {
 .dark-mode .list-item-value {
   color: #c084fc !important;
 }
-
-/* Fix: Remove white background from add asset/debt/stock forms in dark mode */
-.dark-mode #networth-forms .form-group,
-.dark-mode #networth-forms input,
-.dark-mode #networth-forms select {
-  background: #23272a !important;
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode label {
   color: #e5e7eb !important;
-  border-color: #444 !important;
 }
-.dark-mode #networth-forms {
-  background: #18181b !important;
-}
-.dark-mode #networth-forms button {
-  background: #23272a !important;
-  color: #c084fc !important;
-  border: 1px solid #444 !important;
-}
-.dark-mode #networth-forms input::placeholder {
+.dark-mode input::placeholder {
   color: #a1a1aa !important;
 }
