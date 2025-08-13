@@ -382,20 +382,16 @@
         }
       }
       function toggleTheme() {
-        console.log("Theme toggle clicked!"); // Debug log
         const body = document.body;
         const themeToggle = document.getElementById("theme-toggle");
-
-        if (body.classList.contains("dark-theme")) {
-          body.classList.remove("dark-theme");
+        if (body.classList.contains("dark-mode")) {
+          body.classList.remove("dark-mode");
           themeToggle.textContent = "🌙";
           localStorage.setItem("theme", "light");
-          console.log("Switched to light theme");
         } else {
-          body.classList.add("dark-theme");
+          body.classList.add("dark-mode");
           themeToggle.textContent = "☀️";
           localStorage.setItem("theme", "dark");
-          console.log("Switched to dark theme");
         }
       }
 
@@ -403,13 +399,11 @@
       function initializeTheme() {
         const savedTheme = localStorage.getItem("theme");
         const themeToggle = document.getElementById("theme-toggle");
-        console.log("Initializing theme:", savedTheme); // Debug log
-
         if (savedTheme === "dark") {
-          document.body.classList.add("dark-theme");
+          document.body.classList.add("dark-mode");
           if (themeToggle) themeToggle.textContent = "☀️";
         } else {
-          document.body.classList.remove("dark-theme");
+          document.body.classList.remove("dark-mode");
           if (themeToggle) themeToggle.textContent = "🌙";
         }
       }
