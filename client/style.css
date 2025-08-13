@@ -371,6 +371,20 @@ input::placeholder {
   transform: translateY(-1px);
 }
 
+/* Ensure all add buttons in networth forms are same size in all themes */
+#networth-forms .btn-success,
+#networth-forms .btn-primary,
+#networth-forms .btn-danger,
+#networth-forms button.btn-success,
+#networth-forms button.btn-primary,
+#networth-forms button.btn-danger {
+  width: 100%;
+  font-size: 1.1rem;
+  min-width: 120px;
+  padding: var(--space-md) var(--space-xl);
+  box-sizing: border-box;
+}
+
 /* Keep delete button red in dark mode */
 .dark-mode .btn-danger,
 .dark-mode button.btn-danger {
