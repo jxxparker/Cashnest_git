@@ -807,22 +807,17 @@ input::placeholder {
   border: 1px solid #18181b !important;
 }
 
-/* Dark mode fixes for net worth forms and lists */
-.dark-mode #networth-forms,
-.dark-mode #networth-lists {
-  background: #23272f !important;
-  color: #e5e7eb !important;
-}
-.dark-mode .form-group label {
-  color: #e5e7eb !important;
+/* Dark mode overrides for net worth forms and lists */
+.dark-mode .stat-card,
+.dark-mode .list-container {
+  background: #23272a !important;
+  border: 1px solid #18181b !important;
 }
 .dark-mode .list-item {
-  background: #23272f !important;
+  background: #23272a !important;
   border-bottom: 1px solid #18181b !important;
 }
-.dark-mode .list-item-content {
-  color: #e5e7eb !important;
-}
+.dark-mode .list-item-content,
 .dark-mode .list-item-title {
   color: #e5e7eb !important;
 }
@@ -832,23 +827,20 @@ input::placeholder {
 .dark-mode .list-item-value {
   color: #c084fc !important;
 }
-
-/* Dark mode fixes for add asset, add debt, add stock forms */
-.dark-mode #networth-forms .form-group,
-.dark-mode #networth-forms input,
-.dark-mode #networth-forms select {
-  background: #23272f !important;
+.dark-mode .form-group label {
+  color: #e5e7eb !important;
+}
+.dark-mode .form-group input,
+.dark-mode .form-group select {
+  background: #23272a !important;
   color: #e5e7eb !important;
   border-color: #444 !important;
 }
-.dark-mode #networth-forms label {
-  color: #e5e7eb !important;
+.dark-mode .form-group input::placeholder {
+  color: #a1a1aa !important;
 }
-.dark-mode #networth-forms button {
-  background: #23272f !important;
+.dark-mode .form-group button {
+  background: #23272a !important;
   color: #c084fc !important;
   border: 1px solid #444 !important;
-}
-.dark-mode #networth-forms input::placeholder {
-  color: #a1a1aa !important;
 }
