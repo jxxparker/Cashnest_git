@@ -371,6 +371,18 @@ input::placeholder {
   transform: translateY(-1px);
 }
 
+/* Keep delete button red in dark mode */
+.dark-mode .btn-danger,
+.dark-mode button.btn-danger {
+  background: #ef4444 !important;
+  color: #fff !important;
+  border: 1px solid #ef4444 !important;
+}
+.dark-mode .btn-danger:hover,
+.dark-mode button.btn-danger:hover {
+  background: #dc2626 !important;
+}
+
 /* Stats Grid */
 .stats-grid {
   display: grid;
