@@ -2,15 +2,7 @@
 // API_URL will be available globally
 // Helper function to format currency with smart abbreviations
 function formatCurrency(amount) {
-  if (amount >= 1000000) {
-    return (amount / 1000000).toFixed(1) + "M";
-  } else if (amount >= 10000) {
-    return Math.round(amount / 1000) + "K";
-  } else if (amount >= 1000) {
-    return (amount / 1000).toFixed(1) + "K";
-  } else {
-    return amount.toLocaleString();
-  }
+  return amount.toFixed(2);
 }
 
 // Fetch assets, debts, stocks and calculate net worth
