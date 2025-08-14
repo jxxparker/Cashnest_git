@@ -30,14 +30,14 @@ async function fetchNetWorth() {
     // Render stats
     renderNetWorthStats(assetsTotal, stocksTotal, debtsTotal, netWorth);
 
-  // Store data globally
-  window.assets = assets;
-  window.debts = debts;
-  window.stocks = stocks;
+    // Store data globally
+    window.assets = assets;
+    window.debts = debts;
+    window.stocks = stocks;
 
-  // Render all forms and lists
-  renderNetWorthForms();
-  renderNetWorthLists();
+    // Render all forms and lists
+    renderNetWorthForms();
+    renderNetWorthLists();
   } catch (error) {
     console.error("Error fetching net worth data:", error);
     showNetWorthError("Failed to load data. Please try again.");
@@ -149,8 +149,11 @@ function renderNetWorthForms(tab = "assets") {
 
 function renderNetWorthLists(tab = "assets") {
   const listsContainer = document.getElementById("networth-lists");
-  let assetsHTML = window.assets && window.assets.length > 0
-    ? window.assets.map(asset => `
+  let assetsHTML =
+    window.assets && window.assets.length > 0
+      ? window.assets
+          .map(
+            (asset) => `
         <div class="list-item">
           <div class="list-item-content">
             <div class="list-item-title">${asset.name}</div>
@@ -158,14 +161,21 @@ function renderNetWorthLists(tab = "assets") {
           </div>
           <div style="display: flex; align-items: center; gap: var(--space-md);">
             <div class="list-item-value positive">$${asset.value.toLocaleString()}</div>
-            <button class="btn btn-danger" onclick="deleteItem('asset', '${asset._id}')">Delete</button>
+            <button class="btn btn-danger" onclick="deleteItem('asset', '${
+              asset._id
+            }')">Delete</button>
           </div>
         </div>
-      `).join("")
-    : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No assets yet</div><div class="list-item-subtitle">Add your first asset above</div></div></div>';
+      `
+          )
+          .join("")
+      : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No assets yet</div><div class="list-item-subtitle">Add your first asset above</div></div></div>';
 
-  let debtsHTML = window.debts && window.debts.length > 0
-    ? window.debts.map(debt => `
+  let debtsHTML =
+    window.debts && window.debts.length > 0
+      ? window.debts
+          .map(
+            (debt) => `
         <div class="list-item">
           <div class="list-item-content">
             <div class="list-item-title">${debt.name}</div>
@@ -173,26 +183,41 @@ function renderNetWorthLists(tab = "assets") {
           </div>
           <div style="display: flex; align-items: center; gap: var(--space-md);">
             <div class="list-item-value negative">$${debt.value.toLocaleString()}</div>
-            <button class="btn btn-danger" onclick="deleteItem('debt', '${debt._id}')">Delete</button>
+            <button class="btn btn-danger" onclick="deleteItem('debt', '${
+              debt._id
+            }')">Delete</button>
           </div>
         </div>
-      `).join("")
-    : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No debts yet</div><div class="list-item-subtitle">Add debt information above</div></div></div>';
+      `
+          )
+          .join("")
+      : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No debts yet</div><div class="list-item-subtitle">Add debt information above</div></div></div>';
 
-  let stocksHTML = window.stocks && window.stocks.length > 0
-    ? window.stocks.map(stock => `
+  let stocksHTML =
+    window.stocks && window.stocks.length > 0
+      ? window.stocks
+          .map(
+            (stock) => `
         <div class="list-item">
           <div class="list-item-content">
             <div class="list-item-title">${stock.symbol}</div>
-            <div class="list-item-subtitle">${stock.shares} shares @ $${stock.price || "Loading..."}</div>
+            <div class="list-item-subtitle">${stock.shares} shares @ $${
+              stock.price || "Loading..."
+            }</div>
           </div>
           <div style="display: flex; align-items: center; gap: var(--space-md);">
-            <div class="list-item-value primary">$${((stock.price || 0) * stock.shares).toLocaleString()}</div>
-            <button class="btn btn-danger" onclick="deleteItem('stock', '${stock._id}')">Delete</button>
+            <div class="list-item-value primary">$${(
+              (stock.price || 0) * stock.shares
+            ).toLocaleString()}</div>
+            <button class="btn btn-danger" onclick="deleteItem('stock', '${
+              stock._id
+            }')">Delete</button>
           </div>
         </div>
-      `).join("")
-    : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No stocks yet</div><div class="list-item-subtitle">Add your first stock above</div></div></div>';
+      `
+          )
+          .join("")
+      : '<div class="list-item"><div class="list-item-content"><div class="list-item-title">No stocks yet</div><div class="list-item-subtitle">Add your first stock above</div></div></div>';
 
   listsContainer.innerHTML = `
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-lg);">
