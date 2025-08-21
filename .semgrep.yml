@@ -1,0 +1,12 @@
+rules:
+  - id: detect-twelvedata-api
+    pattern: '"https://api.twelvedata.com/price"'
+    message: "Twelve Data API URL detected. Make sure API usage is secure and keys are not hardcoded."
+    languages: [javascript, typescript]
+    severity: WARNING
+
+  - id: detect-hardcoded-api-key
+    pattern-regex: '"[0-9a-f]{32}"'
+    message: "Possible hardcoded API key detected. Store keys in environment variables instead."
+    languages: [javascript, typescript]
+    severity: ERROR
