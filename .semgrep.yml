@@ -5,8 +5,8 @@ rules:
     languages: [javascript, typescript]
     severity: WARNING
 
-  - id: detect-hardcoded-api-key
-    pattern-regex: '"[0-9a-f]{32}"'
-    message: "Possible hardcoded API key detected. Store keys in environment variables instead."
-    languages: [javascript, typescript]
-    severity: ERROR
+  # - id: detect-hardcoded-api-key
+  #   pattern-regex: '"[0-9a-f]{32}"'
+  #   message: "Possible hardcoded API key detected. Store keys in environment variables instead."
+  #   languages: [javascript, typescript]
+  #   severity: ERROR

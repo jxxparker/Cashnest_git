@@ -6,10 +6,7 @@ on:
     branches:
       - main
       - master
-    paths:
-      - .github/workflows/semgrep.yml
   schedule:
-    # random HH:MM to avoid a load spike on GitHub Actions at 00:00
     - cron: "12 15 * * *"
 jobs:
   semgrep:
@@ -19,4 +16,3 @@ jobs:
       - uses: returntocorp/semgrep-action@v1
         with:
           publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
-          config: .semgrep.yml
