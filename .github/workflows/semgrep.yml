@@ -2,7 +2,8 @@ name: Semgrep
 on:
   workflow_dispatch:
   pull_request:
-  push: { branches: [main, master] }
+  push:
+    branches: [main, master]
 
 jobs:
   semgrep:
@@ -12,5 +13,3 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: returntocorp/semgrep-action@v1
-        with:
-          config: .semgrep.yml # <-- this is the key line
