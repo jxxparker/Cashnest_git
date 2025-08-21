@@ -1,5 +1,5 @@
 rules:
-  - id: detect-twelvedata-api
+  - id: detect-twelvedata-api-test
     pattern: '"https://api.twelvedata.com/price"'
     message: "Twelve Data API URL detected. Make sure API usage is secure and keys are not hardcoded."
     languages: [javascript, typescript]
