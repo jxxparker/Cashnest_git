@@ -1,19 +1,19 @@
 name: Semgrep
 
 on:
-  workflow_dispatch: {}
-  pull_request: {}
+  workflow_dispatch:
+  pull_request:
   push:
-    branches: [main, master]
-    # Run when rules or JS/TS code changes
+    branches:
+      - main
+      - master
     paths:
       - .semgrep.yml
       - .github/workflows/semgrep.yml
       - "**/*.js"
       - "**/*.ts"
-  # Daily scheduled scan (UTC time)
   schedule:
-    - cron: "40 04 * * *"
+    - cron: "40 04 * * *" # UTC
 
 jobs:
   semgrep:
@@ -25,7 +25,24 @@ jobs:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: semgrep/semgrep:1.131.0
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Debug confirm rule file
+        run: |
+          set -e
+          pwd
+          ls -la
+          if [ -f ".semgrep.yml" ]; then
+            echo "Found .semgrep.yml"
+          else
+            echo "Missing .semgrep.yml"
+            exit 1
+          fi
+
+      - name: Run Semgrep with local rules
+        run: semgrep ci --config .semgrep.yml --verbose
