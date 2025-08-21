@@ -1,0 +1,8 @@
+rules:
+  - id: detect-hardcoded-password
+    message: "Hardcoded password detected. Use env vars or a secret manager."
+    severity: ERROR
+    languages: [javascript, typescript, python]
+    # Use a block scalar so we don't fight YAML escaping
+    pattern-regex: |
+      (?i)password\s*=\s*["']?[A-Za-z0-9@#\$%^&*_\-+=!?.]{6,}["']?
