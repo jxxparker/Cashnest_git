@@ -1,7 +1,12 @@
 name: Semgrep
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Deploy to EC2?"
+        required: true
+        default: "false"
   pull_request: {}
   push:
     branches:
@@ -29,10 +34,17 @@ jobs:
     name: Deploy to EC2 / aka check apt-get
     needs: semgrep
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.deploy == 'true'
     steps:
-      - name: Install SSH client
+      - name: Install SSH client on runner
         run: sudo apt-get update && sudo apt-get install -y openssh-client
+
+      - name: Prepare SSH key
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Run simple check on EC2
         run: |
